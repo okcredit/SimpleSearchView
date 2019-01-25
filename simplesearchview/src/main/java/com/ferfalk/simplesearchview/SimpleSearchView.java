@@ -299,15 +299,8 @@ public class SimpleSearchView extends FrameLayout {
     }
 
     private void onTextChanged(CharSequence newText) {
-        query = newText;
-        boolean hasText = !TextUtils.isEmpty(newText);
-        if (hasText) {
-            clearButton.setVisibility(VISIBLE);
-            showVoice(false);
-        } else {
-            clearButton.setVisibility(GONE);
-            showVoice(true);
-        }
+        clearButton.setVisibility(VISIBLE);
+        showVoice(false);
 
         if (onQueryChangeListener != null && !TextUtils.equals(newText, oldQuery)) {
             onQueryChangeListener.onQueryTextChange(newText.toString());

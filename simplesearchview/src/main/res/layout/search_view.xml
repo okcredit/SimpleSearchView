@@ -54,7 +54,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:contentDescription="@string/action_clear_search"
-            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@id/buttonVoice"
             app:srcCompat="@drawable/ic_close_black_24dp"
             tools:visibility="visible" />
