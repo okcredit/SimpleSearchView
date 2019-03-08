@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         tabLayout = findViewById(R.id.tabLayout);
 
+        searchView.hideCancelButton();
+        searchView.closePageOnBack();
+        searchView.showPreText();
+
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.container);
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -62,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Adding padding to the animation because of the hidden menu item
         Point revealCenter = searchView.getRevealAnimationCenter();
+
         revealCenter.x -= DimensUtils.convertDpToPx(EXTRA_REVEAL_CENTER_PADDING, this);
     }
 

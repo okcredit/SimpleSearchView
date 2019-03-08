@@ -26,7 +26,20 @@
             android:textColorHint="@color/default_textColorHint"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@id/buttonClear"
-            app:layout_constraintStart_toEndOf="@id/buttonBack" />
+            app:layout_constraintStart_toEndOf="@id/preSearchText" />
+
+        <TextView
+            android:id="@+id/preSearchText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:gravity="center"
+            android:textColor="#666666"
+            android:text="₹"
+            android:layout_marginRight="3dp"
+            android:layout_marginEnd="3dp"
+            app:layout_constraintEnd_toStartOf="@id/searchEditText"
+            app:layout_constraintStart_toEndOf="@id/buttonBack"/>
 
         <ImageButton
             android:id="@+id/buttonBack"

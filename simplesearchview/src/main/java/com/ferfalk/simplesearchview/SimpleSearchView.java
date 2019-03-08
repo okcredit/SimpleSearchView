@@ -33,6 +33,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.ferfalk.simplesearchview.utils.ContextUtils;
 import com.ferfalk.simplesearchview.utils.DimensUtils;
@@ -75,6 +76,7 @@ public class SimpleSearchView extends FrameLayout {
     private boolean allowVoiceSearch = false;
     private boolean isSearchOpen = false;
     private boolean isClearingFocus = false;
+    private boolean isBackToClosePage = false;
     private String voiceSearchPrompt = "";
     @Style
     private int style = STYLE_BAR;
@@ -83,6 +85,7 @@ public class SimpleSearchView extends FrameLayout {
     private EditText searchEditText;
     private ImageButton backButton;
     private ImageButton clearButton;
+    private TextView preSearchText;
     private ImageButton voiceButton;
     private View bottomLine;
 
@@ -122,6 +125,7 @@ public class SimpleSearchView extends FrameLayout {
         searchEditText = findViewById(R.id.searchEditText);
         backButton = findViewById(R.id.buttonBack);
         clearButton = findViewById(R.id.buttonClear);
+        preSearchText = findViewById(R.id.preSearchText);
         voiceButton = findViewById(R.id.buttonVoice);
         bottomLine = findViewById(R.id.bottomLine);
     }
@@ -221,7 +225,13 @@ public class SimpleSearchView extends FrameLayout {
     }
 
     private void initClickListeners() {
-        backButton.setOnClickListener(v -> closeSearch());
+        backButton.setOnClickListener(v -> {
+            if (isBackToClosePage) {
+                onBackClicked();
+            } else  {
+                closeSearch();
+            }
+        });
         clearButton.setOnClickListener(v -> clearSearch());
         voiceButton.setOnClickListener(v -> voiceSearch());
     }
@@ -298,8 +308,26 @@ public class SimpleSearchView extends FrameLayout {
         }
     }
 
+    private void onBackClicked() {
+        searchEditText.setText(null);
+        if (onQueryChangeListener != null) {
+            onQueryChangeListener.onBackClicked();
+        }
+    }
+
+    public void closePageOnBack() {
+        isBackToClosePage = true;
+    }
+
+    public void hideCancelButton() {
+        clearButton.setVisibility(GONE);
+    }
+
+    public void showPreText() {
+        preSearchText.setVisibility(VISIBLE);
+    }
+
     private void onTextChanged(CharSequence newText) {
-        clearButton.setVisibility(VISIBLE);
         showVoice(false);
 
         if (onQueryChangeListener != null && !TextUtils.equals(newText, oldQuery)) {
@@ -844,6 +872,13 @@ public class SimpleSearchView extends FrameLayout {
          * @return true to override the default action
          */
         boolean onQueryTextCleared();
+
+        /**
+         * Called when pressing back by the user.
+         *
+         * @return true to override the default action
+         */
+        boolean onBackClicked();
     }
 
 

@@ -21,4 +21,10 @@ public abstract class SimpleOnQueryTextListener implements SimpleSearchView.OnQu
         // No action
         return false;
     }
+
+    @Override
+    public boolean onBackClicked() {
+        // No action
+        return false;
+    }
 }
