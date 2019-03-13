@@ -206,7 +206,7 @@ public class SimpleSearchView extends FrameLayout {
 
     private void initSearchEditText() {
         searchEditText.setOnEditorActionListener((v, actionId, event) -> {
-            onSubmitQuery();
+//            onSubmitQuery();
             return true;
         });
 
@@ -684,6 +684,7 @@ public class SimpleSearchView extends FrameLayout {
 
     public void setInputType(int inputType) {
         searchEditText.setInputType(inputType);
+
     }
 
     /**
